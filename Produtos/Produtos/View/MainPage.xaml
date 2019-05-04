@@ -1,0 +1,24 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:Produtos"
+             x:Class="Produtos.MainPage">
+
+    <StackLayout Margin="10">
+        <!-- Place new controls here -->
+        <Label x:Name="lblTitulo"
+               Text="Cadastro de produto" 
+               HorizontalOptions="Center"
+               VerticalOptions="Start" />
+        <Label Text="Descrição:" HorizontalOptions="Start" 
+               VerticalOptions="Start"></Label>
+        <Entry x:Name="txtDescricao" Placeholder="Descreva o produto!" HorizontalOptions="Fill">            
+        </Entry>
+        <Label Text="Preço:"></Label>
+        <Entry x:Name="txtPreco" Placeholder="Qual o preço do produto!" HorizontalOptions="Fill"></Entry>
+        <Switch x:Name="swtAtivo" IsToggled="True" HorizontalOptions="End"></Switch>        
+        <Button Text="SALVAR" Clicked="Button_Clicked"></Button>
+        <Button x:Name="btnApagar" Text="Apagar" Clicked="BtnApagar_Clicked"></Button>
+    </StackLayout>
+
+</ContentPage>

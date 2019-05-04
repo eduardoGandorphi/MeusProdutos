@@ -3,3 +3,9 @@
 ################################################################################
 
 /.vs/Produtos/v15
+/Produtos/Produtos/obj
+/Produtos/Produtos.Android/bin/Debug
+/Produtos/Produtos.Android/obj
+/Produtos/Produtos.iOS/obj
+/Produtos/Produtos.UWP/obj
+/Produtos/Produtos/bin/Debug/netstandard2.0
