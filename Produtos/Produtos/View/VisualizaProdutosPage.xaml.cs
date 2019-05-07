@@ -1,6 +1,7 @@
 ﻿using Produtos.Business;
 using Produtos.DataAccess;
 using Produtos.Model;
+using Produtos.View;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -16,7 +17,7 @@ namespace Produtos
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class VisualizaProdutosPage : ContentPage
     {
-        protected MainPage mainPage;
+        protected CadastraProdutoPage CadastraProdutoPage;
         ProdutoBL produtoBL_obj = new ProdutoBL();
         public VisualizaProdutosPage()
         {
@@ -26,23 +27,15 @@ namespace Produtos
             var lista = produtoBL_obj.List(conn);
             conn.Close();
 
-            //ProdutoMD ultimoCadastrado = lista.LastOrDefault();
-            //lblPrincipal.Text = $"{ultimoCadastrado.Descricao}: {ultimoCadastrado.Preco}";
-
-            //lvProduto.ItemsSource = lista.Select(p => $"{p.Id}:{p.Descricao}:{p.Preco}:{p.Ativo}").ToList();
-            //lvProduto.ItemTapped += ItemSelecionadoString;
-
             lvCustom.ItemsSource = lista;
             lvCustom.ItemTapped += ItemSelecionadoProdutoMD;
-            //foreach (ProdutoMD md_obj in lista)
-            //{
-            //    lblPrincipal.Text = lblPrincipal.Text + $"{md_obj.Descricao}\t{md_obj.Preco}\n";
-            //}
+
         }
         private void ItemSelecionadoProdutoMD(object sender, ItemTappedEventArgs args)
         {
             ProdutoMD produtoTapped_obj = (ProdutoMD)args.Item;
-            App.Nav.PushAsync(new MainPage(produtoTapped_obj));
+            this.CadastraProdutoPage = new CadastraProdutoPage(produtoTapped_obj);
+            App.Nav.PushAsync(CadastraProdutoPage);
         }
         private void ItemSelecionadoString(object sender, ItemTappedEventArgs e)
         {            
@@ -56,23 +49,34 @@ namespace Produtos
                 Ativo = bool.Parse(valores[3]),
             };
 
-            App.Nav.PushAsync(new MainPage(md));
+            App.Nav.PushAsync(new CadastraProdutoPage(md));
         }
 
         
         private void Button_Clicked(object sender, EventArgs e)
         {
-            mainPage = new MainPage(new ProdutoMD());
-            App.Nav.PushAsync(mainPage);
+            CadastraProdutoPage = new CadastraProdutoPage(new ProdutoMD());
+            App.Nav.PushAsync(CadastraProdutoPage);
         }
 
         protected override void OnAppearing()
         {
             base.OnAppearing();
-            if (this.mainPage != null && this.mainPage.mdSalvo != null)//FOI CADASTRADO COM SUCESSO
+            if (this.CadastraProdutoPage != null &&
+                this.CadastraProdutoPage.mdSalvo != null &&
+                !this.CadastraProdutoPage.edicao)//FOI CADASTRADO COM SUCESSO
             {
                 ObservableCollection<ProdutoMD> lista_Produto = (ObservableCollection<ProdutoMD>)lvCustom.ItemsSource;
-                lista_Produto.Add(this.mainPage.mdSalvo);
+                lista_Produto.Add(this.CadastraProdutoPage.mdSalvo);
+            }
+            else if (this.CadastraProdutoPage != null &&
+                this.CadastraProdutoPage.mdSalvo != null &&
+                this.CadastraProdutoPage.edicao)
+            {
+                ObservableCollection<ProdutoMD> lista_Produto = (ObservableCollection<ProdutoMD>)lvCustom.ItemsSource;
+                ProdutoMD prodDaLista = lista_Produto.Where(p => p.Id == this.CadastraProdutoPage.mdSalvo.Id).FirstOrDefault();
+                lista_Produto.Remove(prodDaLista);
+                lista_Produto.Add(this.CadastraProdutoPage.mdSalvo);
             }
         }
 

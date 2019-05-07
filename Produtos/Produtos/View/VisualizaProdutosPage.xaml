@@ -17,12 +17,12 @@
                 <Label x:Name="lblStatus"/>
                 <Switch x:Name="swtStatus" IsToggled="True" Toggled="SwtStatus_Toggled"></Switch>
             </StackLayout>
-            <ListView x:Name="lvCustom">
+            <ListView x:Name="lvCustom" Margin="10,0,10,0">
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <ViewCell>
                             <StackLayout Orientation="Horizontal" HorizontalOptions="Fill">
-                                <StackLayout Orientation="Vertical" HorizontalOptions="Fill">
+                                <StackLayout Orientation="Vertical" HorizontalOptions="StartAndExpand">
                                     <Label Text="{Binding Descricao}"></Label>
                                     <Label Text="{Binding Preco}"></Label>
                                 </StackLayout>
