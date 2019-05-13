@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" x:Class="Produtos.View.PedidoPage">
+    <ContentPage.ToolbarItems>
+            <ToolbarItem x:Name="tbiBuscaProd" Clicked="tbiBuscaItem_Clicked"></ToolbarItem>
+    </ContentPage.ToolbarItems>
+    <ContentPage.Content>
+         <StackLayout>
+             <StackLayout Orientation="Horizontal"> 
+                <Label Text="Numero Pedido:"></Label>
+                <Label Text="{Binding NumPedido}"></Label>
+                </StackLayout>
+            <ListView Margin="10,0,10,0">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <StackLayout Orientation="Horizontal" HorizontalOptions="Fill" Margin="10,15,10,15">
+                                <Label Text="{Binding Descricao}" HorizontalOptions="StartAndExpand"></Label>
+                                <Label Text="{Binding Preco}"></Label>
+                            </StackLayout>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>            
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

@@ -1,32 +1,25 @@
-﻿<?xml version="1.0" encoding="utf-8" ?>
+<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="Produtos.VisualizaProdutosPage">
+             x:Class="Produtos.VisualizaProdutosPage"
+             Title="Produtos">
+    <ContentPage.ToolbarItems>
+        <ToolbarItem x:Name="tbiAddProd" Text="Add" Clicked="tbiAddItem_Clicked"></ToolbarItem>
+        <ToolbarItem x:Name="tbiVender"  Text="Venda" Clicked="tbiVender_Clicked"></ToolbarItem>
+    </ContentPage.ToolbarItems>
     <ContentPage.Content>
         <StackLayout>
-            <Label x:Name="lblPrincipal"
-                Text="Tela de Visualizar Produtos!"
-                VerticalOptions="Start" 
-                HorizontalOptions="CenterAndExpand" />
-            <Button Text="Adiconar" Clicked="Button_Clicked"></Button>
-            <StackLayout Orientation="Horizontal">
-                <Button x:Name="btnAtivos" Text="Ativos" Clicked="BtnAtivos_Clicked"></Button>
-                <Button x:Name="btnInativos" Text="Inativos" Clicked="BtnInativos_Clicked"></Button>
-            </StackLayout>
-            <StackLayout>
-                <Label x:Name="lblStatus"/>
-                <Switch x:Name="swtStatus" IsToggled="True" Toggled="SwtStatus_Toggled"></Switch>
+            <StackLayout Padding="10,0,10,0" Orientation="Horizontal">
+                <Label x:Name="lblStatus" Text="Ativos" HorizontalOptions="StartAndExpand" VerticalOptions="Center"/>
+                <Switch x:Name="swtStatus" IsToggled="True" Toggled="SwtStatus_Toggled" HorizontalOptions="EndAndExpand" VerticalOptions="Center"></Switch>
             </StackLayout>
             <ListView x:Name="lvCustom" Margin="10,0,10,0">
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <ViewCell>
-                            <StackLayout Orientation="Horizontal" HorizontalOptions="Fill">
-                                <StackLayout Orientation="Vertical" HorizontalOptions="StartAndExpand">
-                                    <Label Text="{Binding Descricao}"></Label>
-                                    <Label Text="{Binding Preco}"></Label>
-                                </StackLayout>
-                                <Switch IsToggled="{Binding Ativo}" HorizontalOptions="End"></Switch>
+                            <StackLayout Orientation="Horizontal" HorizontalOptions="Fill" Margin="10,15,10,15">
+                                <Label Text="{Binding Descricao}" HorizontalOptions="StartAndExpand"></Label>
+                                <Label Text="{Binding Preco}"></Label>
                             </StackLayout>
                         </ViewCell>
                     </DataTemplate>

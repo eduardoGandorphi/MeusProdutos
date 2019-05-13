@@ -14,6 +14,8 @@ namespace Produtos
             InitializeComponent();
             var MinhaClasseConexao = new Conexao();
             MinhaClasseConexao.CriaEstruturaBanco();
+
+
             Nav = new NavigationPage(new VisualizaProdutosPage());
             MainPage = Nav;
         }

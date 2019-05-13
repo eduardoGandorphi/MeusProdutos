@@ -52,13 +52,6 @@ namespace Produtos
             App.Nav.PushAsync(new CadastraProdutoPage(md));
         }
 
-        
-        private void Button_Clicked(object sender, EventArgs e)
-        {
-            CadastraProdutoPage = new CadastraProdutoPage(new ProdutoMD());
-            App.Nav.PushAsync(CadastraProdutoPage);
-        }
-
         protected override void OnAppearing()
         {
             base.OnAppearing();
@@ -99,6 +92,16 @@ namespace Produtos
             var conn = Conexao.Get();
             lvCustom.ItemsSource = produtoBL_obj.List(conn, swtStatus.IsToggled);
             conn.Close();
+        }
+
+        private void tbiAddItem_Clicked(object sender, System.EventArgs e)
+        {
+            this.CadastraProdutoPage = new CadastraProdutoPage(new ProdutoMD());
+            App.Nav.PushAsync(CadastraProdutoPage);
+        }
+        private void tbiVender_Clicked(object sender, System.EventArgs e)
+        {
+            App.Nav.PushAsync(new PedidoPage());
         }
     }
 }
